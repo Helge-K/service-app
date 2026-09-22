@@ -25,7 +25,6 @@
             background-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
             color: var(--tg-theme-text-color, #000);
             font-size: 15px;
-            /* Стилизация выпадающего списка */
             appearance: none;
             -webkit-appearance: none;
         }
@@ -64,10 +63,9 @@
         </div>
         <div class="form-group">
             <label>ФИО / Имя клиента:</label>
-            <input type="text" id="client" placeholder="Виктория" required>
+            <input type="text" id="client" value="Без имени" placeholder="Имя клиента" required>
         </div>
 
-        <!-- Выпадающий список (ComboBox) -->
         <div class="form-group">
             <label>Тип устройства:</label>
             <div class="select-wrapper">
@@ -77,28 +75,31 @@
                     <option value="Струйный принтер">Струйный принтер</option>
                     <option value="Лазерное МФУ">Лазерное МФУ</option>
                     <option value="Лазерный принтер">Лазерный принтер</option>
-                    <option value="Термопринтер / POS">Термопринтер / POS</option>
-                    <option value="Плоттер">Плоттер</option>
-                    <option value="Другое">Другое</option>
+                    <option value="Аудиотехника">Аудиотехника</option>
+                    <option value="Видеотехника">Видеотехника</option>
+                    <option value="Компьютерная техника">Компьютерная техника</option>
+                    <option value="Мониторы">Мониторы</option>
+                    <option value="Телевизоры">Телевизоры</option>
+                    <option value="Разное">Разное</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
             <label>Модель:</label>
-            <input type="text" id="model" placeholder="Epson L3251" required>
+            <input type="text" id="model" placeholder="Укажите модель" required>
         </div>
         <div class="form-group">
-            <label>Причина / Неисправность:</label>
-            <textarea id="defect" rows="3" placeholder="Плохая печать"></textarea>
+            <label>Неисправность:</label>
+            <textarea id="defect" rows="3" placeholder="Описание неисправности" required></textarea>
         </div>
         <div class="form-group">
             <label>Комплектация:</label>
-            <input type="text" id="equipment" placeholder="Без комплектации">
+            <input type="text" id="equipment" value="Без комплектации" placeholder="Без комплектации" required>
         </div>
         <div class="form-group">
             <label>Состояние:</label>
-            <input type="text" id="condition" placeholder="Б/У, царапины">
+            <input type="text" id="condition" value="Удовлетворительное (Б/У)" placeholder="Удовлетворительное (Б/У)" required>
         </div>
         <button type="submit">Сохранить заявку</button>
     </form>
