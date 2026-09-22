@@ -16,7 +16,7 @@
         h3 { margin-top: 0; text-align: center; }
         .form-group { margin-bottom: 12px; }
         label { display: block; margin-bottom: 4px; font-weight: bold; font-size: 13px; }
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
@@ -25,6 +25,22 @@
             background-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
             color: var(--tg-theme-text-color, #000);
             font-size: 15px;
+            /* Стилизация выпадающего списка */
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        .select-wrapper {
+            position: relative;
+        }
+        .select-wrapper::after {
+            content: "▼";
+            font-size: 10px;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #888;
         }
         button {
             width: 100%;
@@ -44,19 +60,45 @@
     <form id="orderForm">
         <div class="form-group">
             <label>Телефон клиента:</label>
-            <input type="tel" id="phone" placeholder="8 (978) 000-00-00" required>
+            <input type="tel" id="phone" placeholder="+7 (978) 000-00-00" required>
         </div>
         <div class="form-group">
-            <label>Устройство / Модель:</label>
-            <input type="text" id="device" placeholder="Epson L355" required>
+            <label>ФИО / Имя клиента:</label>
+            <input type="text" id="client" placeholder="Виктория" required>
+        </div>
+
+        <!-- Выпадающий список (ComboBox) -->
+        <div class="form-group">
+            <label>Тип устройства:</label>
+            <div class="select-wrapper">
+                <select id="type" required>
+                    <option value="" disabled selected>Выберите тип...</option>
+                    <option value="Струйное МФУ">Струйное МФУ</option>
+                    <option value="Струйный принтер">Струйный принтер</option>
+                    <option value="Лазерное МФУ">Лазерное МФУ</option>
+                    <option value="Лазерный принтер">Лазерный принтер</option>
+                    <option value="Термопринтер / POS">Термопринтер / POS</option>
+                    <option value="Плоттер">Плоттер</option>
+                    <option value="Другое">Другое</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Модель:</label>
+            <input type="text" id="model" placeholder="Epson L3251" required>
         </div>
         <div class="form-group">
             <label>Причина / Неисправность:</label>
-            <textarea id="defect" rows="3" placeholder="Завоздушено / Не захватывает бумагу"></textarea>
+            <textarea id="defect" rows="3" placeholder="Плохая печать"></textarea>
         </div>
         <div class="form-group">
             <label>Комплектация:</label>
             <input type="text" id="equipment" placeholder="Без комплектации">
+        </div>
+        <div class="form-group">
+            <label>Состояние:</label>
+            <input type="text" id="condition" placeholder="Б/У, царапины">
         </div>
         <button type="submit">Сохранить заявку</button>
     </form>
@@ -70,9 +112,12 @@
 
             const data = {
                 phone: document.getElementById('phone').value,
-                device: document.getElementById('device').value,
+                client: document.getElementById('client').value,
+                type: document.getElementById('type').value,
+                model: document.getElementById('model').value,
                 defect: document.getElementById('defect').value,
-                equipment: document.getElementById('equipment').value
+                equipment: document.getElementById('equipment').value,
+                condition: document.getElementById('condition').value
             };
 
             // Отправляем сформированный JSON обратно боту
