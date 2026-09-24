@@ -212,7 +212,9 @@
             };
 
             // Отправляем сформированный JSON обратно боту
-            tg.sendData(JSON.stringify(data));
+              tg.sendData(JSON.stringify(data));
+            // Закрываем окно WebApp
+              tg.close();
         });
     </script>
 </body>
