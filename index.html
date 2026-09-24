@@ -51,6 +51,7 @@
             font-size: 16px;
             font-weight: bold;
             margin-top: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -108,9 +109,8 @@
         const tg = window.Telegram.WebApp;
         tg.expand();
 
-        // --- Маска ввода телефона ---
+        // Маска ввода телефона
         const phoneInput = document.getElementById('phone');
-
         phoneInput.addEventListener('input', onPhoneInput);
         phoneInput.addEventListener('keydown', onPhoneKeyDown);
         phoneInput.addEventListener('paste', onPhonePaste);
@@ -178,7 +178,6 @@
             }
         }
 
-        // --- Вспомогательная функция получения даты и времени клика ---
         function getFormattedDateTime() {
             const now = new Date();
             const YYYY = now.getFullYear();
@@ -190,12 +189,11 @@
             return `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`;
         }
 
-        // --- Отправка формы ---
+        // Отправка формы
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Извлекаем данные о пользователе из Telegram WebApp API
-            const user = tg.initDataUnsafe && tg.initDataUnsafe.user ? tg.initDataUnsafe.user : {};
+            const user = (tg.initDataUnsafe && tg.initDataUnsafe.user) ? tg.initDataUnsafe.user : {};
 
             const data = {
                 send_time: getFormattedDateTime(),
@@ -211,10 +209,9 @@
                 condition: document.getElementById('condition').value
             };
 
-            // Отправляем сформированный JSON обратно боту
-              tg.sendData(JSON.stringify(data));
-            // Закрываем окно WebApp
-              tg.close();
+            // Отправляем данные боту и закрываем WebApp
+            tg.sendData(JSON.stringify(data));
+            tg.close();
         });
     </script>
 </body>
